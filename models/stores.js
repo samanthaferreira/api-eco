@@ -6,8 +6,9 @@ const Schema = mongoose.Schema;
 const storesSchema = new Schema({
   type: String,
   name: String,
+  about: String,
   picUrl: String,
-  about: String
+  pic2Url:String
 });
 
 const Stores = mongoose.model('Stores', storesSchema);

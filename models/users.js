@@ -6,7 +6,8 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   password: String,
-  admin: Boolean
+  admin: Boolean,
+  favorites:[]
 });
 
 const User = mongoose.model('User', userSchema);
