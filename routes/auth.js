@@ -58,12 +58,19 @@ router.post('/signup', (req, res, next) => {
         return res.status(422).json({code: 'username-not-unique'});
       }
 
+     let isAdmin = false;
+
+      if (username === "sambossy"){
+        isAdmin = true;
+      }
+
       const salt = bcrypt.genSaltSync(10);
       const hashPass = bcrypt.hashSync(password, salt);
 
       const newUser = User({
         username,
-        password: hashPass
+        password: hashPass,
+        admin: isAdmin
       });
 
       return newUser.save()

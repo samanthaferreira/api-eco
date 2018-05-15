@@ -4,7 +4,8 @@ const router = express.Router();
 
 const Stores = require('../models/stores');
 
-router.get('/', (req, res, next) => {
+/*GET home page*/
+router.get('/stores', (req, res, next) => {
   Stores.find()
   .then((result) => {
     res.json(result);
