@@ -26,6 +26,7 @@ router.post('/login', (req, res, next) => {
   }
 
   User.findOne({ username })
+    .populate('favorites')
     .then((user) => {
       if (!user) {
         return res.status(404).json({code: 'not-found'});
@@ -86,5 +87,31 @@ router.post('/logout', (req, res) => {
   req.session.currentUser = null;
   return res.status(204).send();
 });
+
+// router.post('/me/favorites', (req, res, next) => {
+//   if (req.session.currentUser) {
+//  return res.status(401).json({code: 'unauthorized'});
+//     }  // if not logged in 
+//     req.session.user
+//     req.body.store
+  
+//     User.update(user.favorites._id){
+//         User.push(store._id){
+//          user.favorites
+//         }
+
+//       }
+    
+
+  //update user favorites and push
+  // id of user? req.session......
+  // id of store? req.body.store
+  // options - send the option to return the updated user as the result
+  // User.update( {_id: id of user}  , {$push : { "favorites": id of store } }, options )
+
+  // then(result) -> send user to frontend json(result)
+  // catch
+// })
+
 
 module.exports = router;

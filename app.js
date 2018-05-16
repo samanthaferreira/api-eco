@@ -18,7 +18,7 @@ const app = express();
 //connect to db
 
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/stores-mean', {
+mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
   reconnectTries: Number.MAX_VALUE
 });
@@ -39,7 +39,7 @@ app.use(session({
 
 app.use(cors({
   credentials: true,
-  origin: ['http://localhost:4200']
+  origin: [process.env.CLIENT_URL]
 }));
 
 app.use(logger('dev'));
