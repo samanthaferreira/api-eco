@@ -14,13 +14,19 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  const type = req.body.type;
-  const name = req.body.name;
-  const about = req.body.about;
-  const picUrl = req.body.picUrl;
-  const pic2Url = req.body.pic2Url;
+  const newData = {
+    type: req.body.type,
+    name: req.body.name,
+    about: req.body.about,
+    address: req.body.address,
+    phone: req.body.phone,
+    picUrl: req.body.picUrl,
+    pic2Url: req.body.pic2Url,
+    pic3Url: req.body.pic3Url,
+    takeMe: req.body.takeMe
+  }
 
-  const newStores = new Stores({type,name,about, picUrl, pic2Url});
+  const newStores = new Stores(newData);
   console.log(newStores)
   newStores.save()
     .then((result) => {
@@ -28,5 +34,16 @@ router.post('/', (req, res, next) => {
     })
     .catch(next);
 });
-  
+
+router.get('/:id', (req, res, next) => {
+  Stores.findById(req.params.id)
+  .then((result) => {
+    res.json(result);
+  })
+  .catch(next);
+});
+
+
+
+
   module.exports = router;
